@@ -1,0 +1,7 @@
+{
+  "name": "sctr-app-company",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
