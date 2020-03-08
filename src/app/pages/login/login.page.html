@@ -1,0 +1,78 @@
+<ion-content class="ion-padding">
+  <div class="all-content">
+    <section class="ion-padding main-content">
+      <div class="ion-padding ion-text-center">
+        <div class="app-name">
+          <img src="../../../assets/imgs/logo_sctr.png" alt="Logo SCTR" />
+        </div>
+        <ion-text color="dark">
+          <h5>Ingresa a tu cuenta</h5>
+        </ion-text>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="loginUser(loginForm.value)">
+        <ion-item color="medium" class="ion-margin-bottom">
+          <ion-input
+            type="email"
+            formControlName="email"
+            placeholder="Ingresa tu email"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-error">
+          <ng-container *ngFor="let validation of validation_messages.email">
+            <div
+              *ngIf="loginForm.get('email').hasError(validation.type) && (loginForm.get('email').dirty || loginForm.get('email').touched)"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <ion-item color="medium">
+          <ion-input
+            type="password"
+            formControlName="password"
+            placeholder="Ingresa tu contraseña"
+          ></ion-input>
+        </ion-item>
+        <div class="validation-error">
+          <ng-container *ngFor="let validation of validation_messages.password">
+            <div
+              *ngIf="loginForm.get('password').hasError(validation.type) && (loginForm.get('password').dirty || loginForm.get('password').touched)"
+            >
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <div class="ion-text-center ion-padding">
+          <a href="#">
+            ¿Olvidaste tu contraseña?
+          </a>
+        </div>
+        <!-- <ion-grid class="ion-no-padding">
+          <ion-row>
+            <ion-col size="12" class="ion-no-padding">
+              <ion-button expand="block" color="medium" href="/register">CREAR CUENTA</ion-button>
+            </ion-col>
+            <ion-col size="6" class="ion-no-padding">
+            </ion-col>
+          </ion-row>
+        </ion-grid> -->
+        <ion-button
+          expand="block"
+          color="success"
+          [disabled]="!loginForm.valid"
+          type="submit"
+          >INGRESAR</ion-button
+        >
+      </form>
+    </section>
+    <section class="ion-padding ion-text-center bottom-content">
+      <ion-text color="dark">
+        <p>Tu Seguro Siempre Contigo</p>
+      </ion-text>
+      <div color="light">
+        <img src="../../../assets/imgs/logo_insured.png" alt="Logo Insured" />
+        <p class="ion-no-margin insured">INSURED</p>
+      </div>
+    </section>
+  </div>
+</ion-content>
