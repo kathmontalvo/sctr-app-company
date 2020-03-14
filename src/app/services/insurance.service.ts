@@ -24,6 +24,33 @@ export class InsuranceService {
     const url = "http://adm.sctr-insured.com.pe/api/plant/home";
     return (this.data = this.http.get(url, { headers: headers }));
   }
+
+  getCurrentInsurance(insured_id: number) {
+    const headers = new HttpHeaders({
+      Authorization: "Bearer " + this.sessionService.getItem("access_token"),
+      Accept: "application/json, text/plain"
+    });
+    const url = "http://adm.sctr-insured.com.pe/api/plant/insurence";
+    return this.http.post(url, { insured_id }, { headers: headers }).pipe(
+      map(data => {
+        return data;
+      })
+    );
+  }
+
+  getInsuranceRegister(insured_id: number) {
+    const headers = new HttpHeaders({
+      Authorization: "Bearer " + this.sessionService.getItem("access_token"),
+      Accept: "application/json, text/plain"
+    });
+    const url = "http://adm.sctr-insured.com.pe/api/plant/history";
+    return this.http.post(url, { insured_id }, { headers: headers }).pipe(
+      map(data => {
+        return data;
+      })
+    );
+  }
+
   readQR(code: any) {
     const formHeaders = new HttpHeaders({
       Authorization: "Bearer " + this.sessionService.getItem("access_token"),
@@ -33,6 +60,27 @@ export class InsuranceService {
     fd.append("code", code);
     const url = "http://adm.sctr-insured.com.pe/api/plant/read/qr";
     
+    return this.http.post(url, fd, { headers: formHeaders }).pipe(
+      map(data => {
+        return data;
+      })
+    );
+  }
+
+  checkRegister(users, insurence, plant, body, type ){
+    const formHeaders = new HttpHeaders({
+      Authorization: "Bearer " + this.sessionService.getItem("access_token"),
+      Accept: "application/json, text/plain"
+    });
+    const fd = new FormData();
+    const url = "http://adm.sctr-insured.com.pe/api/plant/mark/assistance";
+
+    fd.append("users", JSON.stringify(users));
+    fd.append("insurence", insurence);
+    fd.append("plant", plant);
+    fd.append("body", body);
+    fd.append("type", type);
+    console.log(fd)
     return this.http.post(url, fd, { headers: formHeaders }).pipe(
       map(data => {
         return data;

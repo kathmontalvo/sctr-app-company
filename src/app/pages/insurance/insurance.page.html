@@ -1,9 +1,146 @@
-<ion-header>
+<ion-header *ngIf="insuranceInfo">
   <ion-toolbar>
-    <ion-title>insurance</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [icon]="buttonIcon"
+        defaultHref="/home"
+        text=""
+      ></ion-back-button>
+    </ion-buttons>
+
+    <ion-title color="white" class="ion-text-center">
+      {{ sctrType.name }}
+    </ion-title>
+
+    <ion-buttons slot="end">
+      <ion-avatar>
+        <img
+          src="{{ user.image_url }}"
+          alt="User avatar"
+          [routerLink]="['/profile']"
+        />
+      </ion-avatar>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="insuranceInfo">
+  <ion-segment
+    color="success"
+    value="details"
+    class="ion-padding"
+    [(ngModel)]="segment"
+    mode="md"
+  >
+    <ion-segment-button value="details">
+      <ion-label>DETALLE</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="pdf">
+      <ion-label>PDF</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="insuranced">
+      <ion-label>ASEGURADOS</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 
+  <div class="ion-padding-horizontal" [ngSwitch]="segment">
+    <div *ngSwitchCase="'details'">
+      <div class="company-container ion-margin-vertical">
+        <ion-item lines="none">
+          <ion-avatar slot="start">
+            <img src="{{insuranceInfo.contratist.image_url}}" alt="">
+          </ion-avatar>
+          <ion-label>
+            <h2> {{insuranceInfo.contratist.business}} </h2>
+            <h3> {{insuranceInfo.contratist.business_ruc}} </h3>
+          </ion-label>
+        </ion-item>
+      </div>
+
+      <ion-list class="ion-no-padding">
+        <ion-item>
+          <ion-label>
+            <h3>Asegurador</h3>
+            <p>{{insuranceInfo.insucompany.name}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h3>Contrato en salud</h3>
+            <p>{{insuranceInfo.health}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h3>Póliza en pensión</h3>
+            <p>{{insuranceInfo.policy}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h3>Factura</h3>
+            <p>{{insuranceInfo.invonce}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h3>Liquidación</h3>
+            <p>{{insuranceInfo.settling}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h3>Periodo de cobertura</h3>
+            <p>
+              De {{insuranceInfo.from_format}} al {{insuranceInfo.to_format}}
+            </p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h3>Broker</h3>
+            <p>{{insuranceInfo.broker}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-label>
+            <h3>Cantidad de asegurados</h3>
+            <p>{{insuranceInfo.insu_users.length}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+    <iframe
+      [src]="protectedUrl"
+      type="application/pdf"
+      width="100%"
+      height="600px"
+      *ngSwitchCase="'pdf'"
+    >
+    </iframe>
+
+    <ion-list *ngSwitchCase="'insuranced'">
+      <ion-item
+        *ngFor="let user of users"
+        class="ion-margin-vertical"
+        lines="none"
+      >
+        <ion-avatar>
+          <img src="{{ user.user.image_url }}" alt="user image" />
+        </ion-avatar>
+        <ion-label class="ion-padding-start">
+          <h2>{{ user.user.name }} {{user.user.lastname}}</h2>
+          <p>
+            Del {{ insuranceInfo.from_format }} al {{ insuranceInfo.to_format }}
+          </p>
+        </ion-label>
+        <ion-button color="success" (click)="openRegister($ev, user.user.id)">
+          Ver más
+        </ion-button>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div class=" ion-justify-content-center footer-logo">
+    <img src="../../../assets/imgs/logo_insured.png" alt="Logo Insured" />
+  </div>
 </ion-content>

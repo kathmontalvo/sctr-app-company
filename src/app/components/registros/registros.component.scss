@@ -1,0 +1,36 @@
+ion-content {
+    h2 {
+      text-align: center;
+      font-weight: bold;
+    }
+    ion-title {
+      margin-bottom: 2.5rem;
+    }
+    ion-card {
+      ion-card-header {
+        display: flex;
+        ion-title {
+          padding-left: 0;
+        }
+      }
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      ion-textarea {
+        --padding: 12px;
+        --padding-end: 10px;
+        --border-radius: 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        border: 1px solid var(--ion-color-medium-tint)
+      }
+      ion-textarea:focus {
+        outline: none;
+      }
+      ion-button {
+        align-self: flex-end;
+      }
+    }
+  }
+  

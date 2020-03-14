@@ -1,0 +1,31 @@
+<ion-content>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-icon size="large" name="close" (click)="onClick()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-text>
+    <h5 class="ion-padding-horizontal">Selecciona a los colaboradores presentes:</h5>
+  </ion-text>
+
+  <ion-card>
+    <ion-list>
+      <ion-item *ngFor="let user of usersList">
+        <ion-label>{{ user.name }} {{ user.lastname }}</ion-label>
+        <ion-checkbox slot="end" [(ngModel)]="user.check"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+    <ion-card-content>
+      <ion-textarea
+      color="dark"
+      name="comment"
+      id="comment"
+      cols="40"
+      rows="4"
+      placeholder="Añadir un comentario"
+      [(ngModel)]="commentText"
+    ></ion-textarea>
+      <ion-button expand="block" color="success" (click)="sendRegister()" > Enviar</ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

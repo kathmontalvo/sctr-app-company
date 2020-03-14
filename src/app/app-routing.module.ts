@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
   {
-    path: 'insurance',
+    path: 'insurance/:id',
     loadChildren: () => import('./pages/insurance/insurance.module').then( m => m.InsurancePageModule)
   },
   {

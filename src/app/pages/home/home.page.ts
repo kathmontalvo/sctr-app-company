@@ -56,6 +56,10 @@ export class HomePage implements OnInit {
   goToQrPage() {
     this.router.navigateByUrl("/qr-reader")
   }
+    
+  navigateToInsurance(id) {
+    this.router.navigate(["/insurance", id]);
+  }
 
   async showLoading() {
     this.loading = await this.loadingController.create({
