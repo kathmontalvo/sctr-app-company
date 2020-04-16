@@ -5,41 +5,8 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-text>
-    <h2>Registro de entrada y salida</h2>
+    <h2>Registro de visitas</h2>
   </ion-text>
-  <ion-card class="ion-margin-vertical">
-    <ion-card-header>
-      <ion-text>
-        <h3>Hoy</h3>
-      </ion-text>
-    </ion-card-header>
-    <ion-card-content>
-      <p>
-        Entrada: <span>{{ dateStr === today.from.date ? today.from.hour : "-" }}</span>
-      </p>
-      <p>
-        Salida: <span>{{ dateStr === today.to.date ? today.to.hour : "-" }}</span>
-      </p>
-      <br />
-      <!-- <div>Comentario: {{ dateStr === today ? today.body : "-" }}</div> -->
-      <div>Comentario:</div>
-      <form class="ion-margin-vertical">
-        <ion-textarea
-          color="dark"
-          name="comment"
-          id="comment"
-          cols="40"
-          rows="4"
-          placeholder="Añadir un comentario"
-          [(ngModel)]="commentText"
-        ></ion-textarea>
-        <ion-button color="success" (click)="onRegister()"
-          >Registrar {{ dateStr !== today.from.date ? "entrada" : "salida" }}
-        </ion-button>
-        <!-- <ion-button color="light">Enviar</ion-button> -->
-      </form>
-    </ion-card-content>
-  </ion-card>
 
   <ion-card *ngFor="let visit of visits">
     <ion-card-header>

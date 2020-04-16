@@ -37,8 +37,9 @@ export class QrReaderPage implements OnInit {
         this.insuranceService.readQR(this.data).subscribe(
           res => {
             const users = res["data"].users;
-            console.log(users);
-            this.popUsers($ev, users);
+            const register = res["data"].registers
+            console.log({users, register});
+            this.popUsers($ev, users, register);
           },
           error => {
             console.log(error);
@@ -59,8 +60,9 @@ export class QrReaderPage implements OnInit {
     this.insuranceService.readQR(this.inputCode).subscribe(
       res => {
         const users = res["data"].users;
-        console.log(users);
-        this.popUsers($ev, users);
+        const register = res["data"].registers
+        console.log({users, register});
+        this.popUsers($ev, users, register);
       },
       error => {
         console.log(error);
@@ -68,8 +70,9 @@ export class QrReaderPage implements OnInit {
     );
   }
 
-  async popUsers(ev, users) {
+  async popUsers(ev, users, register) {
     this.sessionService.setObject("usersList", users);
+    this.sessionService.setObject("checkRegister", register);
     const popover = await this.popOverCtrl.create({
       component: PopoverComponent,
       event: ev,

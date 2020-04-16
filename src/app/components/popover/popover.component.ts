@@ -17,6 +17,7 @@ export class PopoverComponent implements OnInit {
 
   commentText: string = "";
   usersList;
+  registers;
   check: boolean = true;
   insurance_id;
   plant;
@@ -34,6 +35,7 @@ export class PopoverComponent implements OnInit {
 
   getUserList() {
     const list = this.sessionService.getObject("usersList");
+    this.registers= this.sessionService.getObject("checkRegister");
     this.usersList = list.map(user => {
       const elemento = {
         name: user.user.name,
@@ -51,15 +53,17 @@ export class PopoverComponent implements OnInit {
         return el.check;
       })
       .map(el => el.id);
-    // console.log(updatedUsers, this.insurance_id, this.plant, this.commentText);
+    const register = this.registers !== updatedUsers ? 0 : 1;
+    
+    console.log(updatedUsers, this.insurance_id, this.plant, this.commentText);
 
     this.insuranceService
       .checkRegister(
         updatedUsers,
         this.insurance_id,
         this.plant,
-        this.commentText,
-        0
+        this.commentText || 'Sin comentarios.',
+        register
       )
       .subscribe(
         res => {

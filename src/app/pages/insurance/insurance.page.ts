@@ -17,7 +17,7 @@ export class InsurancePage implements OnInit {
   segment: string;
   sctrType: object;
   users: object[];
-  companies: object[];
+  visits;
   insuranceId: number;
   insuranceInfo: object;
   elementType: "url" | "canvas" | "img" = "url";
@@ -39,11 +39,12 @@ export class InsurancePage implements OnInit {
     private loadingController: LoadingController
   ) {}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.showLoading();
 
-    let id = parseInt(this.route.snapshot.paramMap.get("id"));
+    let id = await parseInt(this.route.snapshot.paramMap.get("id"));
     this.insuranceId = id;
+    console.log({id})
     this.segment = "details";
     this.user = this.sessionService.getObject("user");
     this.getInsuranceData(this.insuranceId);
@@ -79,13 +80,15 @@ export class InsurancePage implements OnInit {
 
   getRegister(id) {
     this.insuranceService.getInsuranceRegister(id).subscribe(response => {
-      this.companies = response["data"];
-      console.log(this.companies);
+      this.visits = response["data"][0].users;
+      console.log(response, response["data"][0].users);
     });
   }
 
   async openRegister(ev, key) {
-    this.sessionService.setObject("register", this.companies[key]);
+    console.log(key)
+    const userVisits = this.visits.filter((el)=> el.id === key)
+    this.sessionService.setObject("register", userVisits);
     const popover = await this.popOverCtrl.create({
       component: RegistrosComponent,
       event: ev,

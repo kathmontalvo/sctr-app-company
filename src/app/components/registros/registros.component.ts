@@ -36,7 +36,7 @@ export class RegistrosComponent implements OnInit {
   ngOnInit() {
     const register = this.sessionService.getObject("register")
     console.log(register);
-    this.visits = register["visits"];
+    this.visits = register[0]["visits"];
     const lastEl = this.visits.length - 1;
     this.today = this.visits[lastEl];
     console.log(this.dateStr)
@@ -69,14 +69,6 @@ export class RegistrosComponent implements OnInit {
 
     console.log(insurence_id, plant_id, body, date)
 
-    // this.insuranceService.postRegister(insurence_id, plant_id, body, date, date).subscribe(
-    //   response => {
-    //     alert("updated")
-    //   },
-    //   error => {
-    //     alert(error)
-    //   }
-    // )
   }
 
 }
