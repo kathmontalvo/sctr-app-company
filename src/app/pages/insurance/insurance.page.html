@@ -48,11 +48,11 @@
       <div class="company-container ion-margin-vertical">
         <ion-item lines="none">
           <ion-avatar slot="start">
-            <img src="{{insuranceInfo.contratist.image_url}}" alt="">
+            <img src="{{insuranceInfo.contratist.image_url}}" alt="" />
           </ion-avatar>
           <ion-label>
-            <h2> {{insuranceInfo.contratist.business}} </h2>
-            <h3> {{insuranceInfo.contratist.business_ruc}} </h3>
+            <h2>{{insuranceInfo.contratist.business}}</h2>
+            <h3>{{insuranceInfo.contratist.business_ruc}}</h3>
           </ion-label>
         </ion-item>
       </div>
@@ -110,14 +110,16 @@
         </ion-item>
       </ion-list>
     </div>
-    <iframe
-      [src]="protectedUrl"
-      type="application/pdf"
-      width="100%"
-      height="600px"
-      *ngSwitchCase="'pdf'"
-    >
-    </iframe>
+    <div *ngSwitchCase="'pdf'">
+      <iframe
+        *ngIf="protectedUrl"
+        [src]="protectedUrl"
+        type="application/pdf"
+        width="100%"
+        height="600px"
+      >
+      </iframe>
+    </div>
 
     <ion-list *ngSwitchCase="'insuranced'">
       <ion-item
@@ -140,7 +142,5 @@
       </ion-item>
     </ion-list>
   </div>
-  <div class=" ion-justify-content-center footer-logo">
-    <img src="../../../assets/imgs/logo_insured.png" alt="Logo Insured" />
-  </div>
+  <app-footer></app-footer>
 </ion-content>

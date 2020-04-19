@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { InsurancePageRoutingModule } from './insurance-routing.module';
+import { ComponentsModule } from '../../components/components.module';
 
 import { InsurancePage } from './insurance.page';
 
@@ -13,7 +14,8 @@ import { InsurancePage } from './insurance.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    InsurancePageRoutingModule
+    InsurancePageRoutingModule,
+    ComponentsModule
   ],
   declarations: [InsurancePage]
 })

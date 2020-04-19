@@ -66,7 +66,7 @@ export class InsurancePage implements OnInit {
         this.protectedUrl = await this.sanitizer.bypassSecurityTrustResourceUrl(
           this.insuranceInfo["document"]
         );
-
+        console.log('pdf url', this.protectedUrl);
         this.getRegister(insuranceId);
       },
       error => {

@@ -1,11 +1,10 @@
 <ion-header>
   <ion-toolbar>
-
     <ion-buttons slot="start">
       <ion-back-button (click)="navigateToHome()" [text]="" [icon]="buttonIcon">
       </ion-back-button>
     </ion-buttons>
-    
+
     <ion-title color="white" class="ion-text-center">Mi perfil</ion-title>
 
     <ion-buttons slot="end">
@@ -72,6 +71,30 @@
       <ion-label class="margin-start">{{ userInfo.business_ruc }}</ion-label>
     </ion-item>
   </ion-list>
+  <ion-list class="ion-margin-top">
+    <ion-list-header class="ion-no-padding" color="light">
+      Privacidad
+    </ion-list-header>
+    <ion-item class="ion-no-padding" (click)="downloadPdf('../../../assets/docs/terms_conditions.pdf')">
+      <ion-icon name="document-text-outline"></ion-icon>
+      <ion-label class="ion-padding-start">
+        Términos y condiciones
+      </ion-label>
+    </ion-item>
+    <ion-item class="ion-no-padding" (click)="downloadPdf('../../../assets/docs/privacy_politics.pdf')">
+      <ion-icon name="alert-circle-outline"></ion-icon>
+      <ion-label class="ion-padding-start">
+        Política de privacidad
+      </ion-label>
+    </ion-item>
+    <ion-item class="ion-no-padding" (click)="logOut()">
+      <ion-icon name="power-outline"></ion-icon>
+      <ion-label class="ion-padding-start">
+        Cerrar sesión
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <app-footer></app-footer>
 </ion-content>
 
 <ion-footer></ion-footer>

@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { QrReaderPageRoutingModule } from './qr-reader-routing.module';
+import { ComponentsModule } from '../../components/components.module';
 
 import { QrReaderPage } from './qr-reader.page';
 
@@ -13,7 +14,8 @@ import { QrReaderPage } from './qr-reader.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    QrReaderPageRoutingModule
+    QrReaderPageRoutingModule,
+    ComponentsModule
   ],
   declarations: [QrReaderPage]
 })

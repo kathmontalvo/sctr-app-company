@@ -3,7 +3,7 @@
     <ion-row>
       <ion-col size="9">
         <ion-label>
-          <h2>¡Hola!</h2>
+          <h2>¡Bienvenido!</h2>
           <h1>{{ user.plant.name }} - {{ user.plant.campus }}</h1>
         </ion-label>
       </ion-col>
@@ -23,16 +23,16 @@
   </ion-grid>
 
   <div class="ion-padding chart-card">
-    <ion-label> Rendimiento </ion-label>
+    <ion-label> Métricas </ion-label>
     <ion-card>
       <ion-grid>
         <ion-row>
           <ion-col size="4" class="col-1-chart">
             <h2 class="ion-no-margin" *ngIf="graphicData">
-              {{graphicData.visits}}
+              {{percentage}} %
             </h2>
-            <p class="ion-no-margin">Días en planta</p>
-            <p class="ion-no-margin">en el 2020</p>
+            <p class="ion-no-margin">aumento de proveedores</p>
+            <p class="ion-no-margin">comparado al mes anterior</p>
           </ion-col>
           <ion-col size="8">
             <canvas #barCanvas></canvas>
@@ -74,10 +74,6 @@
     </div>
   </div>
 
-  <div class=" ion-justify-content-center footer-logo">
-    <img src="../../../assets/imgs/logo_insured.png" alt="Logo Insured" />
-  </div>
-
   <ion-fab
     vertical="bottom"
     horizontal="end"
@@ -88,4 +84,5 @@
       <ion-icon name="qr-code-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+  <app-footer></app-footer>
 </ion-content>

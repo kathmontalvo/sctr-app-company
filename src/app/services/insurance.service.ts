@@ -87,4 +87,13 @@ export class InsuranceService {
       })
     );
   }
+
+  getGraphic(){
+    const headers = new HttpHeaders({
+      Authorization: "Bearer " + this.sessionService.getItem("access_token"),
+      Accept: "application/json, text/plain"
+    });
+    const url = "http://adm.sctr-insured.com.pe/api/plant/graphic";
+    return (this.data = this.http.get(url, { headers: headers }));
+  }
 }

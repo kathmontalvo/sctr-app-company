@@ -33,7 +33,8 @@ export class QrReaderPage implements OnInit {
     this.barcodeScanner
       .scan()
       .then(barcodeData => {
-        this.data = barcodeData;
+        this.data = barcodeData.text;
+        console.log(this.data)
         this.insuranceService.readQR(this.data).subscribe(
           res => {
             const users = res["data"].users;
