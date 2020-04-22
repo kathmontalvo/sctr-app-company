@@ -1,66 +1,69 @@
 ion-content {
-    --background: var(--ion-color-light) ;
-    .all-content{
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        .main-content {
-          background: var(--ion-color-white);
-          border-radius: 5px;
-          margin-top: 3em;
-          box-shadow: 0px 0px 6px 2px #e6e6e6a8;
-          .app-name {
-            img {
-              width: 70%;
-            }
-          }
-          form {
-            .ion-color-medium {
-              --ion-color-shade: none !important;
-            }
-            ion-item {
-              --border-radius: 5px;
-              --ion-color-base: var(--ion-color-medium-input-bg) !important;
-      
-              ion-input {
-                --placeholder-color: var(--ion-color-medium-dark);
-                color: var(--ion-color-dark);
-              }
-            }
-            a {
-              color: var(--ion-color-medium-dark);
-            }
-            a:focus {
-              color: var(--ion-color-success);
-            }
-      
-            ion-grid {
-              ion-button {
-                --border-radius: 5px;
-                --background: var(--ion-color-medium);
-                --ion-color-shade: none !important;
-              }
-              .ion-color-medium {
-                --ion-color-contrast: var(--ion-color-medium-dark) !important;
-              }
-            }
+  --background: var(--ion-color-success) url("../../../assets/imgs/bg_login.png") no-repeat fixed center;
+
+  .all-content {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .main-content {
+      background: var(--ion-color-white);
+      border-radius: 5px;
+      margin-top: 3em;
+      box-shadow: 0px 0px 6px 2px #e6e6e6a8;
+      .app-name {
+        img {
+          width: 70%;
+        }
+      }
+      form {
+        .ion-color-medium {
+          --ion-color-shade: none !important;
+        }
+        ion-item {
+          --border-radius: 5px;
+          --ion-color-base: var(--ion-color-medium-input-bg) !important;
+
+          ion-input {
+            --placeholder-color: var(--ion-color-medium-dark);
+            color: var(--ion-color-dark);
           }
         }
-        .bottom-content {
-          bottom: -1.5em;
-          position: relative;
-          div {
-            .insured{
-              font-size: 12px;
-              margin-top: -16px;
-              margin-left: 6px;
-              letter-spacing: 5px;
-              color: var(--ion-color-dark-tint);
-            }
+        a {
+          color: var(--ion-color-medium-dark);
+        }
+        a:focus {
+          color: var(--ion-color-success);
+        }
+
+        ion-grid {
+          ion-button {
+            --border-radius: 5px;
+            --background: var(--ion-color-medium);
+            --ion-color-shade: none !important;
+          }
+          .ion-color-medium {
+            --ion-color-contrast: var(--ion-color-medium-dark) !important;
           }
         }
+      }
+    }
+    .bottom-content {
+      bottom: -1.5em;
+      position: relative;
+      div {
+        color: var(--ion-color-light);
+        img {
+          filter: invert(100%)
+        }
+        .insured {
+          font-size: 12px;
+          margin-top: -16px;
+          margin-left: 6px;
+          letter-spacing: 5px;
+        }
+      }
     }
   }
-  
+}

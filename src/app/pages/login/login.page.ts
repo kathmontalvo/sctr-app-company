@@ -9,7 +9,7 @@ import { AuthService } from "src/app/services/auth.service";
 import { SessionService } from "src/app/services/session.service";
 import { CompanyService } from "src/app/services/company.service";
 import { Router } from "@angular/router";
-import { LoadingController } from "@ionic/angular";
+import { LoadingController, AlertController } from "@ionic/angular";
 
 @Component({
   selector: "app-login",
@@ -36,7 +36,8 @@ export class LoginPage implements OnInit {
     private authService: AuthService,
     private sessionService: SessionService,
     private companyService: CompanyService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private alertCtrl: AlertController
   ) {
     this.loginForm = this.formBuilder.group({
       email: new FormControl(
@@ -82,9 +83,7 @@ export class LoginPage implements OnInit {
         },
         error => {
           this.loading.dismiss();
-          console.log(error, "ghjkasdjasd");
-          const message = error.message + " // " + error.statusText;
-          alert(message);
+          this.presentAlert('Error', 'Usuario y/o contraseña incorrectos. Verifique la información.', 'Aceptar')
         }
       );
   }
@@ -98,10 +97,21 @@ export class LoginPage implements OnInit {
         },
         error => {
           console.log(error);
-          alert("Error en las credenciales. Volver a intentar");
+          this.presentAlert('Error', 'Error en las credenciales. Volver a intentar.', 'Aceptar')
         }
       );
     }
+  }
+  async presentAlert(title, message, btn) {
+    const alert = await this.alertCtrl.create({
+      header: title,
+      message: message,
+      buttons: [{
+        text: btn,
+      }]
+    });
+
+    await alert.present();
   }
   async showLoading() {
     this.loading = await this.loadingController.create({

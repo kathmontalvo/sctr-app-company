@@ -16,60 +16,49 @@
 </ion-header>
 
 <ion-content class="ion-padding ios">
-  <!-- <label class="upload" for="file">
-    <span>
-      <ion-icon name="cloud-upload"></ion-icon> Cargar foto de perfil
-    </span>
-  </label>
-  <input type="file" name="file" id="file" (change)="changeListener($event)" /> -->
-
   <ion-list class="ion-no-padding">
+    <div class="profile-photo">
+      <img src="{{userInfo.image_url}}" class="ion-padding-vertical" />
+    </div>
     <ion-list-header class="ion-no-padding" color="light">
       Información personal
     </ion-list-header>
-
-    <ion-item class="ion-no-padding">
-      <ion-icon name="mail"></ion-icon>
-      <ion-label class="ion-padding-start">
-        Email
-      </ion-label>
-      <ion-label class="margin-start">{{ userInfo.email }}</ion-label>
-    </ion-item>
-    <ion-item class="ion-no-padding">
-      <ion-icon name="call"></ion-icon>
-      <ion-label class="ion-padding-start">
-        Teléfono
-      </ion-label>
-      <ion-label class="margin-start">{{ userInfo.phone }}</ion-label>
-    </ion-item>
-    <ion-item class="ion-no-padding">
-      <ion-icon name="pin"></ion-icon>
-      <ion-label class="ion-padding-start">
-        Dirección
-      </ion-label>
-      <ion-label class="margin-start">{{ userInfo.address }}</ion-label>
-    </ion-item>
-    <ion-item class="ion-no-padding">
-      <ion-icon name="person"></ion-icon>
-      <ion-label class="ion-padding-start">
-        DNI
-      </ion-label>
-      <ion-label class="margin-start">{{ userInfo.doc_number }}</ion-label>
-    </ion-item>
     <ion-item class="ion-no-padding">
       <ion-icon name="briefcase"></ion-icon>
-      <ion-label class="ion-padding-start">
+      <ion-label class="ion-padding-start label-name">
         Empresa
       </ion-label>
       <ion-label class="margin-start">{{ userInfo.business }}</ion-label>
     </ion-item>
     <ion-item class="ion-no-padding">
       <ion-icon name="briefcase"></ion-icon>
-      <ion-label class="ion-padding-start">
+      <ion-label class="ion-padding-start label-name">
         RUC
       </ion-label>
       <ion-label class="margin-start">{{ userInfo.business_ruc }}</ion-label>
     </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-icon name="mail"></ion-icon>
+      <ion-label class="ion-padding-start label-name">
+        Email
+      </ion-label>
+      <ion-label class="margin-start">{{ userInfo.email }}</ion-label>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-icon name="call"></ion-icon>
+      <ion-label class="ion-padding-start label-name">
+        Teléfono
+      </ion-label>
+      <ion-label class="margin-start">{{ userInfo.phone }}</ion-label>
+    </ion-item>
+    <ion-item class="ion-no-padding">
+      <ion-icon name="pin"></ion-icon>
+      <ion-label class="ion-padding-start label-name">
+        Dirección
+      </ion-label>
+      <ion-label class="margin-start">{{ userInfo.address }}</ion-label>
+    </ion-item>
+
   </ion-list>
   <ion-list class="ion-margin-top">
     <ion-list-header class="ion-no-padding" color="light">

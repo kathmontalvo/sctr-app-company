@@ -72,7 +72,7 @@ export class InsurancePage implements OnInit {
       error => {
         this.loading.dismiss();
 
-        console.log(error, "ghjkasdjasd");
+        console.log(error);
         alert("Error al obtener datos del documento.");
       }
     );
@@ -81,7 +81,7 @@ export class InsurancePage implements OnInit {
   getRegister(id) {
     this.insuranceService.getInsuranceRegister(id).subscribe(response => {
       this.visits = response["data"][0].users;
-      console.log(response, response["data"][0].users);
+      console.log(response, response["data"][0].users, id);
     });
   }
 

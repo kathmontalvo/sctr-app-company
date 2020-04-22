@@ -34,12 +34,12 @@ export class RegistrosComponent implements OnInit {
   commentText: string = "";
 
   ngOnInit() {
-    const register = this.sessionService.getObject("register")
+    const register = this.sessionService.getObject("register");
     console.log(register);
-    this.visits = register[0]["visits"];
-    const lastEl = this.visits.length - 1;
-    this.today = this.visits[lastEl];
-    console.log(this.dateStr)
+    this.visits = register[0]["visits"].reverse();
+    // const lastEl = this.visits.length - 1;
+    // this.today = this.visits[lastEl];
+    // console.log(this.dateStr)
   }
 
   onClick() {
