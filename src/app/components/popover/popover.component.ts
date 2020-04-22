@@ -73,18 +73,18 @@ export class PopoverComponent implements OnInit {
       .map(el => el.id);
     const register = this.registers.includes(updatedUsers) ? 0 : 1;
     
-    console.log(updatedUsers, this.insurance_id, this.plant, this.commentText);
-
+    
     this.insuranceService
-      .checkRegister(
-        updatedUsers,
-        this.insurance_id,
-        this.plant,
-        this.commentText || '-',
-        register
+    .checkRegister(
+      updatedUsers,
+      this.insurance_id,
+      this.plant,
+      this.commentText || '-',
+      register
       )
       .subscribe(
         res => {
+          console.log(updatedUsers, this.insurance_id, this.plant, this.commentText, register);
           console.log(res);
           this.presentAlert('¡Excelente!', 'Se ha registrado correctamente a los colaboradores.', 'Aceptar');
         },

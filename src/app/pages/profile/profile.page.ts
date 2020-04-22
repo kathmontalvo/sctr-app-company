@@ -1,9 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { SessionService } from "src/app/services/session.service";
-import { CompanyService } from "src/app/services/company.service";
 import { ToastController } from "@ionic/angular";
 import { LoadingController } from "@ionic/angular";
 import { Router } from "@angular/router";
+import { PreviewAnyFile } from "@ionic-native/preview-any-file/ngx";
 
 @Component({
   selector: "app-profile",
@@ -19,7 +19,8 @@ export class ProfilePage implements OnInit {
     private sessionService: SessionService,
     private router: Router,
     public toastController: ToastController,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private previewAnyFile: PreviewAnyFile
   ) {}
 
   ngOnInit() {
@@ -37,11 +38,14 @@ export class ProfilePage implements OnInit {
     this.router.navigate(["/home"]);
   }
   downloadPdf(pdfUrl) {
-    window.open(pdfUrl);
+    // window.open(pdfUrl);
+    return this.previewAnyFile.preview(pdfUrl)
+      .then((res: any) => console.log(res))
+      .catch((error: any) => console.error(error));
   }
   logOut() {
-    this.sessionService.destroy('access_token');
-    this.sessionService.destroy('user');
+    this.sessionService.destroy("access_token");
+    this.sessionService.destroy("user");
     this.router.navigate(["/login"]);
   }
 }
