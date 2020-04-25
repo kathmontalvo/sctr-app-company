@@ -11,7 +11,6 @@ export class SessionService {
   }
 
   getItem(key) {
-    console.log(localStorage.getItem(key));
     return localStorage.getItem(key);
   }
 

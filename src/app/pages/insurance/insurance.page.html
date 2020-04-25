@@ -119,6 +119,7 @@
         height="600px"
       >
       </iframe>
+      <button (click)="openPdf(protectedUrl)">CLICK</button>
     </div>
 
     <ion-list *ngSwitchCase="'insuranced'">
@@ -136,7 +137,7 @@
             Del {{ insuranceInfo.from_format }} al {{ insuranceInfo.to_format }}
           </p>
         </ion-label>
-        <ion-button color="success" (click)="openRegister($ev, user.user.id)">
+        <ion-button color="success" (click)="openRegister($ev, user.insurence_id, user.user_id)">
           Ver más
         </ion-button>
       </ion-item>

@@ -22,7 +22,6 @@ export class AuthService {
     password: string
   ): Observable<any> {
     const url = "http://adm.sctr-insured.com.pe/api/oauth/token";
-    console.log(grant_type, client_id, client_secret, username, password);
     return this.http
       .post(url, { grant_type, client_id, client_secret, username, password })
       .pipe(

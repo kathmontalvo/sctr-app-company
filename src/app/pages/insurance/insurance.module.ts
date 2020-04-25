@@ -8,6 +8,7 @@ import { InsurancePageRoutingModule } from './insurance-routing.module';
 import { ComponentsModule } from '../../components/components.module';
 
 import { InsurancePage } from './insurance.page';
+import { DocumentViewer } from '@ionic-native/document-viewer/ngx';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { InsurancePage } from './insurance.page';
     InsurancePageRoutingModule,
     ComponentsModule
   ],
-  declarations: [InsurancePage]
+  declarations: [InsurancePage],
+  providers: [DocumentViewer]
 })
 export class InsurancePageModule {}

@@ -7,11 +7,12 @@ import { AuthService } from "../../services/auth.service";
 import { DomSanitizer, SafeUrl } from "@angular/platform-browser";
 import { LoadingController } from "@ionic/angular";
 import { SessionService } from "src/app/services/session.service";
+import { DocumentViewer } from "@ionic-native/document-viewer/ngx";
 
 @Component({
   selector: "app-insurance",
   templateUrl: "./insurance.page.html",
-  styleUrls: ["./insurance.page.scss"]
+  styleUrls: ["./insurance.page.scss"],
 })
 export class InsurancePage implements OnInit {
   segment: string;
@@ -36,7 +37,8 @@ export class InsurancePage implements OnInit {
     private sanitizer: DomSanitizer,
     private authService: AuthService,
     private sessionService: SessionService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private document: DocumentViewer
   ) {}
 
   async ngOnInit() {
@@ -44,7 +46,7 @@ export class InsurancePage implements OnInit {
 
     let id = await parseInt(this.route.snapshot.paramMap.get("id"));
     this.insuranceId = id;
-    console.log({id})
+    console.log({ id });
     this.segment = "details";
     this.user = this.sessionService.getObject("user");
     this.getInsuranceData(this.insuranceId);
@@ -52,57 +54,59 @@ export class InsurancePage implements OnInit {
 
   getInsuranceData(insuranceId) {
     this.insuranceService.getCurrentInsurance(insuranceId).subscribe(
-      async response => {
-        console.log(response);
+      async (response) => {
         this.loading.dismiss();
 
         this.sessionService.setObject("insurance", response["data"]);
         this.insuranceInfo = response["data"];
-        // this.qrcodename = this.insuranceInfo["code"];
-        // this.pdfFile = this.insuranceInfo["document"];
         this.users = this.insuranceInfo["insu_users"];
         this.sctrType = this.insuranceInfo["type"];
 
         this.protectedUrl = await this.sanitizer.bypassSecurityTrustResourceUrl(
-          this.insuranceInfo["document"]
+          `https://docs.google.com/viewer?url=${this.insuranceInfo["document"]}&embedded=true`
         );
-        console.log('pdf url', this.protectedUrl);
-        this.getRegister(insuranceId);
+        console.log("pdf url", this.protectedUrl);
       },
-      error => {
+      (error) => {
         this.loading.dismiss();
-
         console.log(error);
         alert("Error al obtener datos del documento.");
       }
     );
   }
 
-  getRegister(id) {
-    this.insuranceService.getInsuranceRegister(id).subscribe(response => {
-      this.visits = response["data"][0].users;
-      console.log(response, response["data"][0].users, id);
-    });
-  }
-
-  async openRegister(ev, key) {
-    console.log(key)
-    const userVisits = this.visits.filter((el)=> el.id === key)
-    this.sessionService.setObject("register", userVisits);
+  async getPopOver(ev, visits) {
     const popover = await this.popOverCtrl.create({
       component: RegistrosComponent,
+      componentProps: { register: visits },
       event: ev,
       cssClass: "popover-style",
-      translucent: true
+      translucent: true,
     });
     return await popover.present();
   }
 
+  async openRegister(ev, plant_id, user_id) {
+    console.log(plant_id, user_id);
+    this.insuranceService
+      .getInsuranceRegister(plant_id, user_id)
+      .subscribe((response) => {
+        const visits = response["data"][0].users;
+        this.getPopOver(ev, visits)
+      });
+  }
+
   async showLoading() {
     this.loading = await this.loadingController.create({
-      message: ""
+      message: "",
     });
 
     this.loading.present();
+  }
+  openPdf(pdf) {
+    // const options: DocumentViewerOptions = {
+    //   title: 'My PDF'
+    // }
+    this.document.viewDocument(pdf, "application/pdf", { title: "My PDF" });
   }
 }

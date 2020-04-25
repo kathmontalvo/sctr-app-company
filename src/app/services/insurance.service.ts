@@ -38,13 +38,13 @@ export class InsuranceService {
     );
   }
 
-  getInsuranceRegister(insured_id: number) {
+  getInsuranceRegister(insured_id: number, user_id: number) {
     const headers = new HttpHeaders({
       Authorization: "Bearer " + this.sessionService.getItem("access_token"),
       Accept: "application/json, text/plain"
     });
     const url = "http://adm.sctr-insured.com.pe/api/plant/history";
-    return this.http.post(url, { insured_id }, { headers: headers }).pipe(
+    return this.http.post(url, { insured_id, user_id }, { headers: headers }).pipe(
       map(data => {
         return data;
       })

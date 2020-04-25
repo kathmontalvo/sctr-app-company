@@ -19,7 +19,6 @@ export class CompanyService {
     const url = "http://adm.sctr-insured.com.pe/api/oauth/current/user";
     return this.http.post(url, {}, { headers: headers }).pipe(
       map(data => {
-        console.log(data);
         return data;
       })
     );
