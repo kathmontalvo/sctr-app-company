@@ -25,7 +25,7 @@
       placeholder="Añadir un comentario"
       [(ngModel)]="commentText"
     ></ion-textarea>
-      <ion-button expand="block" color="success" (click)="sendRegister()" > Enviar</ion-button>
+      <ion-button id="submit-btn" [disabled]="disabledBtn" expand="block" color="success" (click)="sendRegister()" > Enviar</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

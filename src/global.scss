@@ -36,3 +36,10 @@
     }
   }
 }
+
+ion-item{
+  --background: var(--ion-color-white);
+}
+ion-item:hover{
+  --background: var(--ion-color-light-tint);
+}

@@ -103,10 +103,4 @@ export class InsurancePage implements OnInit {
 
     this.loading.present();
   }
-  openPdf(pdf) {
-    // const options: DocumentViewerOptions = {
-    //   title: 'My PDF'
-    // }
-    this.document.viewDocument(pdf, "application/pdf", { title: "My PDF" });
-  }
 }

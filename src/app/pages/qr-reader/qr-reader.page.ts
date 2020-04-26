@@ -43,7 +43,7 @@ export class QrReaderPage implements OnInit {
             const users = res["data"].users;
             const register = res["data"].registers;
             console.log({ users, register });
-            this.popUsers($ev, users, register);
+            this.popUsers($ev, users, res["data"].registers);
           },
           (error) => {
             console.log(error);
@@ -87,6 +87,7 @@ export class QrReaderPage implements OnInit {
     const popover = await this.popOverCtrl.create({
       component: PopoverComponent,
       event: ev,
+      componentProps: { checkRegister: register, usersList: users },
       cssClass: "popover-style",
       translucent: true,
     });

@@ -3,7 +3,7 @@ import {
   FormGroup,
   FormBuilder,
   FormControl,
-  Validators
+  Validators,
 } from "@angular/forms";
 import { AuthService } from "src/app/services/auth.service";
 import { SessionService } from "src/app/services/session.service";
@@ -14,7 +14,7 @@ import { LoadingController, AlertController } from "@ionic/angular";
 @Component({
   selector: "app-login",
   templateUrl: "./login.page.html",
-  styleUrls: ["./login.page.scss"]
+  styleUrls: ["./login.page.scss"],
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup;
@@ -22,12 +22,12 @@ export class LoginPage implements OnInit {
   validation_messages = {
     email: [
       { type: "required", message: "El email es requerido" },
-      { type: "pattern", message: "Email no es válido" }
+      { type: "pattern", message: "Email no es válido" },
     ],
     password: [
       { type: "required", message: "La contraseña es requerida" },
-      { type: "minLength", message: "Mínimo 6 caracteres " }
-    ]
+      { type: "minLength", message: "Mínimo 6 caracteres " },
+    ],
   };
 
   constructor(
@@ -44,13 +44,13 @@ export class LoginPage implements OnInit {
         "",
         Validators.compose([
           Validators.required,
-          Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$")
+          Validators.pattern("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"),
         ])
       ),
       password: new FormControl(
         "",
         Validators.compose([Validators.required, Validators.minLength(6)])
-      )
+      ),
     });
   }
 
@@ -61,7 +61,7 @@ export class LoginPage implements OnInit {
     const client_id = "2";
     const client_secret = "XrDnYGDzV8bLe0ZHWv71uKJP4vgYsCuvBQZ5fnpV";
     this.showLoading();
-
+    const btn = document.getElementById("login-btn");
     this.authService
       .login(
         grant_type,
@@ -71,33 +71,42 @@ export class LoginPage implements OnInit {
         credentials.password
       )
       .subscribe(
-        async response => {
+        async (response) => {
           console.log(response);
           await this.sessionService.setItem(
             "access_token",
             response["access_token"]
           );
-          this.getUser()
           this.loading.dismiss();
+          btn["disabled"] = true;
           this.router.navigate(["/home"]);
+          this.getUser();
         },
-        error => {
+        (error) => {
           this.loading.dismiss();
-          this.presentAlert('Error', 'Usuario y/o contraseña incorrectos. Verifique la información.', 'Aceptar')
+          this.presentAlert(
+            "Error",
+            "Usuario y/o contraseña incorrectos. Verifique la información.",
+            "Aceptar"
+          );
         }
       );
   }
   getUser() {
     if (this.sessionService.getItem("access_token")) {
       this.companyService.getData().subscribe(
-        user => {
+        (user) => {
           this.sessionService.setObject("user", user["data"]);
           console.log(this.sessionService.getObject("user"));
           this.router.navigate(["/home"]);
         },
-        error => {
+        (error) => {
           console.log(error);
-          this.presentAlert('Error', 'Error en las credenciales. Volver a intentar.', 'Aceptar')
+          this.presentAlert(
+            "Error",
+            "Error en las credenciales. Volver a intentar.",
+            "Aceptar"
+          );
         }
       );
     }
@@ -106,16 +115,18 @@ export class LoginPage implements OnInit {
     const alert = await this.alertCtrl.create({
       header: title,
       message: message,
-      buttons: [{
-        text: btn,
-      }]
+      buttons: [
+        {
+          text: btn,
+        },
+      ],
     });
 
     await alert.present();
   }
   async showLoading() {
     this.loading = await this.loadingController.create({
-      message: ""
+      message: "",
     });
 
     this.loading.present();
