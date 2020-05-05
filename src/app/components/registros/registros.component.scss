@@ -14,24 +14,21 @@ ion-content {
           padding-left: 0;
         }
       }
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      ion-textarea {
-        --padding: 12px;
-        --padding-end: 10px;
-        --border-radius: 10px;
-        margin-bottom: 10px;
-        border-radius: 10px;
-        border: 1px solid var(--ion-color-medium-tint)
-      }
-      ion-textarea:focus {
-        outline: none;
-      }
-      ion-button {
-        align-self: flex-end;
+      ion-card-content{
+        .container-comment{
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          &__text {
+            width: 90%;
+          }
+          ion-icon {
+            margin: auto 0;
+            font-size: 16px;
+          }
+        }
       }
     }
+    
   }
   

@@ -7,15 +7,31 @@
   <ion-text>
     <h2>Registro de visitas</h2>
   </ion-text>
+  <div *ngIf="register.length === 0">
+    <ion-text>
+      <p class="ion-margin">No hay visitas registradas de este(a) colaborador(a) </p>
+    </ion-text>
+  </div>
+  <div *ngIf="register !== []">
+    <ion-card *ngFor="let visit of visits">
+      <ion-card-header>
+        <ion-card-title>{{ visit.from.date }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Entrada: <span>{{ visit.from.hour }}</span> 
+        Salida:  <span>{{ visit.to.hour }}</span>
 
-  <ion-card *ngFor="let visit of visits">
-    <ion-card-header>
-      <ion-card-title>{{ visit.from.date }}</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      Entrada: <span>{{ visit.from.hour }}</span> Salida:
-      <span>{{ visit.to.hour }}</span>
-      <p>* {{ visit.body }}</p>
-    </ion-card-content>
-  </ion-card>
+        <div class="show container-comment ion-padding-top" *ngIf="!visit.edit">
+          <p class="container-comment__text">* {{ visit.body }}</p>
+          <ion-icon name="create-outline" title="Añadir comentario" (click)="changeEdit(visit.id, true)"></ion-icon>
+        </div>
+        <div class="edit container-comment" *ngIf="visit.edit">
+          <ion-input placeholder="Añade un comentario..."  (ionChange)="changeInput($event)" (keyup.enter)="handleEditing(visit.id, false)" ></ion-input>
+          <ion-icon name="add-circle-outline" title="Añadir comentario" (click)="handleEditing(visit.id, false)" ></ion-icon>
+        </div>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+
 </ion-content>

@@ -75,10 +75,10 @@ export class InsurancePage implements OnInit {
     );
   }
 
-  async getPopOver(ev, visits) {
+  async getPopOver(ev, visits, plant_id, user_id) {
     const popover = await this.popOverCtrl.create({
       component: RegistrosComponent,
-      componentProps: { register: visits },
+      componentProps: { register: visits, loading: this.loading, plant_id, user_id },
       event: ev,
       cssClass: "popover-style",
       translucent: true,
@@ -88,11 +88,12 @@ export class InsurancePage implements OnInit {
 
   async openRegister(ev, plant_id, user_id) {
     console.log(plant_id, user_id);
+    this.showLoading();
     this.insuranceService
       .getInsuranceRegister(plant_id, user_id)
       .subscribe((response) => {
-        const visits = response["data"][0].users;
-        this.getPopOver(ev, visits)
+        const visits = response["data"];
+        this.getPopOver(ev, visits, plant_id, user_id)
       });
   }
 

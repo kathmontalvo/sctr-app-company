@@ -4,6 +4,7 @@ import { InsuranceService } from "src/app/services/insurance.service";
 import { SessionService } from "src/app/services/session.service";
 import { PopoverController, AlertController, LoadingController } from "@ionic/angular";
 import { PopoverComponent } from "../../components/popover/popover.component";
+import { ChooseRegisterComponent } from 'src/app/components/choose-register/choose-register.component';
 
 @Component({
   selector: "app-qr-reader",
@@ -85,10 +86,10 @@ export class QrReaderPage implements OnInit {
     this.sessionService.setObject("usersList", users);
     this.sessionService.setObject("checkRegister", register);
     const popover = await this.popOverCtrl.create({
-      component: PopoverComponent,
+      component: ChooseRegisterComponent,
       event: ev,
       componentProps: { checkRegister: register, usersList: users },
-      cssClass: "popover-style",
+      // cssClass: "popover-style",
       translucent: true,
     });
     return await popover.present();

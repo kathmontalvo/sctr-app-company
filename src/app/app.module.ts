@@ -13,11 +13,12 @@ import { FormsModule } from '@angular/forms';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { PopoverComponent } from './components/popover/popover.component';
 import { RegistrosComponent } from './components/registros/registros.component';
-
+import { ModalPdfComponent } from './components/modal-pdf/modal-pdf.component';
+import { ChooseRegisterComponent } from './components/choose-register/choose-register.component';
 
 @NgModule({
-  declarations: [AppComponent, PopoverComponent, RegistrosComponent],
-  entryComponents: [PopoverComponent, RegistrosComponent],
+  declarations: [AppComponent, PopoverComponent, RegistrosComponent, ModalPdfComponent, ChooseRegisterComponent],
+  entryComponents: [PopoverComponent, RegistrosComponent, ModalPdfComponent, ChooseRegisterComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
   exports: [PopoverComponent, RegistrosComponent],
   providers: [

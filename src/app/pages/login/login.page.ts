@@ -77,10 +77,10 @@ export class LoginPage implements OnInit {
             "access_token",
             response["access_token"]
           );
-          this.loading.dismiss();
           btn["disabled"] = true;
-          this.router.navigate(["/home"]);
           this.getUser();
+          this.loading.dismiss();
+          this.router.navigate(["/home"]);
         },
         (error) => {
           this.loading.dismiss();
@@ -96,12 +96,14 @@ export class LoginPage implements OnInit {
     if (this.sessionService.getItem("access_token")) {
       this.companyService.getData().subscribe(
         (user) => {
+          this.loading.dismiss();
           this.sessionService.setObject("user", user["data"]);
           console.log(this.sessionService.getObject("user"));
           this.router.navigate(["/home"]);
         },
         (error) => {
           console.log(error);
+          this.loading.dismiss();
           this.presentAlert(
             "Error",
             "Error en las credenciales. Volver a intentar.",
@@ -121,7 +123,6 @@ export class LoginPage implements OnInit {
         },
       ],
     });
-
     await alert.present();
   }
   async showLoading() {

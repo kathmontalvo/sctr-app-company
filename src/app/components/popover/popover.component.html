@@ -12,7 +12,7 @@
     <ion-list>
       <ion-item *ngFor="let user of usersList">
         <ion-label>{{ user.name }} {{ user.lastname }}</ion-label>
-        <ion-checkbox slot="end" [(ngModel)]="user.check"></ion-checkbox>
+        <ion-checkbox slot="end" [(ngModel)]="user.check" [disabled]="user.disabled"></ion-checkbox>
       </ion-item>
     </ion-list>
     <ion-card-content>

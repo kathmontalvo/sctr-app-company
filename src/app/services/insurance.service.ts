@@ -51,6 +51,24 @@ export class InsuranceService {
     );
   }
 
+  setComments(register_id, body){
+    const formHeaders = new HttpHeaders({
+      Authorization: "Bearer " + this.sessionService.getItem("access_token"),
+    }); 
+
+    const fd = new FormData();
+    fd.append("register_id", register_id);
+    fd.append("body", body);
+
+    const url = "http://adm.sctr-insured.com.pe/api/plant/comment";
+    
+    return this.http.post(url, fd, { headers: formHeaders }).pipe(
+      map(data => {
+        return data;
+      })
+    );
+  }
+
   readQR(code: any) {
     const formHeaders = new HttpHeaders({
       Authorization: "Bearer " + this.sessionService.getItem("access_token"),

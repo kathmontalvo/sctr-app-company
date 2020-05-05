@@ -30,9 +30,10 @@ export class PopoverComponent implements OnInit {
 
   ngOnInit() {
     this.getUserList();
-    this.insurance_id = this.sessionService.getObject("usersList")[0].insurence_id;
+    this.insurance_id = this.navCtrl.get('usersList')[0].insurence_id;
     this.plant = this.sessionService.getObject("user").plant.id;
     this.disabledBtn = false;
+    console.log(this.insurance_id)
   }
 
   onClick() {
@@ -42,14 +43,19 @@ export class PopoverComponent implements OnInit {
   getUserList() {
     const list = this.navCtrl.get('usersList');
     this.registers= this.navCtrl.get('checkRegister');
+    this.type = this.navCtrl.get('type');
+
     this.usersList = list.map(user => {
+      const disabled = this.registers.includes(user.user_id)
       const elemento = {
         name: user.user.name,
         lastname: user.user.lastname,
         id: user.user_id,
-        insurance: user.insurence_id,
-        check: false
+        insurance: disabled,
+        check: false,
+        disabled: this.type == 0 ? disabled : !disabled
       };
+      console.log(this.type, this.registers, elemento, this.registers.includes(user.user_id))
       return elemento;
     });
     this.commentText = ''
@@ -75,20 +81,18 @@ export class PopoverComponent implements OnInit {
         return el.check;
       })
       .map(el => el.id);
-    console.log('includes', this.registers.includes(updatedUsers));
-    const register = !this.registers.includes(updatedUsers) ? 0 : 1;
-    
+      console.log(updatedUsers, this.insurance_id, this.plant, this.commentText, this.type);
     this.insuranceService
     .checkRegister(
       updatedUsers,
       this.insurance_id,
       this.plant,
       this.commentText || '-',
-      register
+      this.type
       )
       .subscribe(
         res => {
-          console.log(updatedUsers, this.insurance_id, this.plant, this.commentText, register);
+          console.log(updatedUsers, this.insurance_id, this.plant, this.commentText, this.type);
           console.log(res);
           this.presentAlert('¡Excelente!', 'Se ha registrado correctamente a los colaboradores.', 'Aceptar');
         },

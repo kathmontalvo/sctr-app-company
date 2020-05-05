@@ -20,6 +20,17 @@
     <div class="profile-photo">
       <img src="{{userInfo.image_url}}" class="ion-padding-vertical" />
     </div>
+    <label class="upload" for="file">
+      <span>
+        <ion-icon name="cloud-upload"></ion-icon> Cargar foto de perfil
+      </span>
+    </label>
+    <input
+      type="file"
+      name="file"
+      id="file"
+      (change)="changeListener($event)"
+    />
     <ion-list-header class="ion-no-padding" color="light">
       Información personal
     </ion-list-header>
@@ -64,13 +75,17 @@
     <ion-list-header class="ion-no-padding" color="light">
       Privacidad
     </ion-list-header>
-    <ion-item class="ion-no-padding" (click)="downloadPdf('../../../assets/docs/terms_conditions.pdf')">
+    <ion-item class="ion-no-padding" 
+    (click)="showPdf('terms', 'Términos y condiciones')"
+    >
       <ion-icon name="document-text-outline"></ion-icon>
       <ion-label class="ion-padding-start">
         Términos y condiciones
       </ion-label>
     </ion-item>
-    <ion-item class="ion-no-padding" (click)="downloadPdf('../../../assets/docs/privacy_politics.pdf')">
+    <ion-item class="ion-no-padding" 
+    (click)="showPdf('policity', 'Política de privacidad')"
+    >
       <ion-icon name="alert-circle-outline"></ion-icon>
       <ion-label class="ion-padding-start">
         Política de privacidad
