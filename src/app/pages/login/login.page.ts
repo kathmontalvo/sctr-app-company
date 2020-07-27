@@ -77,10 +77,9 @@ export class LoginPage implements OnInit {
             "access_token",
             response["access_token"]
           );
-          btn["disabled"] = true;
           this.getUser();
-          this.loading.dismiss();
-          this.router.navigate(["/home"]);
+          // this.loading.dismiss();
+          // this.router.navigate(["/home"]);
         },
         (error) => {
           this.loading.dismiss();
@@ -99,7 +98,15 @@ export class LoginPage implements OnInit {
           this.loading.dismiss();
           this.sessionService.setObject("user", user["data"]);
           console.log(this.sessionService.getObject("user"));
-          this.router.navigate(["/home"]);
+          if(user['data'].role === 4){
+            this.router.navigate(["/home"]);
+          } else {
+            this.presentAlert(
+              "Error",
+              "Usuario no válido. Por favor, verifique e intente nuevamente.",
+              "Aceptar"
+            );
+          }
         },
         (error) => {
           console.log(error);
